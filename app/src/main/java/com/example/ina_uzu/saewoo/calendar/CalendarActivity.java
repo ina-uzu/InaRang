@@ -1,6 +1,7 @@
 package com.example.ina_uzu.saewoo.calendar;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.view.View;
@@ -8,6 +9,9 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
 import com.example.ina_uzu.saewoo.R;
+import com.example.ina_uzu.saewoo.letter.LetterWriteActivity;
+
+import java.util.Calendar;
 
 public class CalendarActivity extends Activity implements View.OnClickListener{
     Boolean openFlag = false;
@@ -66,6 +70,7 @@ public class CalendarActivity extends Activity implements View.OnClickListener{
 
     public void onClick(View v){
         int id = v.getId();
+        Intent intent;
 
         switch (id) {
             case R.id.fab:
@@ -74,9 +79,13 @@ public class CalendarActivity extends Activity implements View.OnClickListener{
             case R.id.fab2:
                 anim();
                 break;
+
+            /* 편지 쓰기 */
             case R.id.fab3:
-                anim();
+                intent = new Intent(CalendarActivity.this, LetterWriteActivity.class);
                 break;
+
+            /* 편지 읽기 */
             case R.id.fab4:
                 anim();
                 break;
