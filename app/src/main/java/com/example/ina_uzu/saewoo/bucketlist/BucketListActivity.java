@@ -38,7 +38,7 @@ public class BucketListActivity extends Activity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(BucketListActivity.this, list.get(position).cont, Toast.LENGTH_LONG).show();
+                Toast.makeText(BucketListActivity.this, "Push "+ String.valueOf(position), Toast.LENGTH_LONG).show();
             }
         });
     }
