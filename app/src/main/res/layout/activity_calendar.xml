@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="70sp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/calendar_title"/>
+
+    <LinearLayout
+        android:layout_below="@+id/title"
+        android:layout_margin="20sp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <GridView
+            android:id="@+id/calendar_view"
+            android:background="@drawable/round"
+            android:layout_margin="5sp"
+            android:layout_width="match_parent"
+            android:layout_height="0sp"
+            android:layout_weight="5">
+        </GridView>
+
+        <ListView
+            android:layout_margin="5sp"
+            android:id="@+id/schedule_view"
+            android:layout_width="match_parent"
+            android:layout_height="0sp"
+            android:layout_weight="2">
+        </ListView>
+    </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        style="@style/fab_normal"
+        android:id="@+id/fab"
+        android:layout_marginBottom="20sp"
+        android:layout_alignParentBottom="true" />
+
+    <android.support.design.widget.FloatingActionButton
+        style="@style/fab_normal"
+        android:id="@+id/fab2"
+        android:layout_above="@+id/fab"/>
+
+    <android.support.design.widget.FloatingActionButton
+        style="@style/fab_normal"
+        android:id="@+id/fab3"
+        android:layout_above="@+id/fab2"/>
+
+    <android.support.design.widget.FloatingActionButton
+        style="@style/fab_normal"
+        android:id="@+id/fab4"
+        android:layout_above="@+id/fab3"/>
+
+</RelativeLayout>

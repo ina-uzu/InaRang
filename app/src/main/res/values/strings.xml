@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">HelloSaeWoo</string>
+    <string name="saewooID">saewoorang</string>
+    <string name="inaID">inarang</string>
+    <string name="id">ID</string>
+    <string name="pwd">PWD</string>
+    <string name="login">LOGIN</string>
+</resources>
