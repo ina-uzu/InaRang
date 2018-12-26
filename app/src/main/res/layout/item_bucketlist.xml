@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="45sp"
+    android:gravity="center_vertical">
+
+    <Button
+        android:id="@+id/checkbox"
+        android:background="@drawable/check_box"
+        android:layout_width="30sp"
+        android:layout_height="30sp" />
+
+    <TextView
+        android:id="@+id/cont"
+        style="@style/text_normal"
+        android:layout_marginLeft="10sp"
+        android:layout_gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
