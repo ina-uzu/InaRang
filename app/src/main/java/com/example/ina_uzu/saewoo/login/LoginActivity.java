@@ -48,6 +48,8 @@ public class LoginActivity extends Activity {
 
                 //Login error
                 else{
+                    et_id.setText("");
+                    et_pwd.setText("");
                     Toast.makeText(LoginActivity.this, "잘못된 아이디 or 비밀번호입니다", Toast.LENGTH_SHORT).show();
                 }
             }

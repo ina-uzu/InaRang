@@ -8,6 +8,24 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!-- Layout -->
+    <style name="title">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">70sp</item>
+        <item name="android:layout_marginTop">10sp</item>
+        <item name="android:layout_centerHorizontal">true</item>
+    </style>
+
+    <style name="body">
+        <item name="android:orientation">vertical</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_marginLeft">30sp</item>
+        <item name="android:layout_marginRight">30sp</item>
+        <item name="android:layout_marginTop">10sp</item>
+        <item name="android:layout_below">@+id/title</item>
+    </style>
+
     <!-- Font -->
     <style name="text_title">
         <item name = "android:textColor">@color/main</item>
@@ -23,17 +41,19 @@
 
     <!-- Buttons -->
     <style name="button_normal">
-        <item name="android:background">@drawable/ic_launcher_background</item>
+        <item name="android:background">@drawable/button_round</item>
         <item name = "android:textColor">@color/white</item>
-        <item name="android:textSize">10sp</item>
+        <item name="android:textSize">15sp</item>
         <item name="android:textStyle">bold</item>
     </style>
 
     <style name="fab_normal">
         <item name="android:layout_width">50dp</item>
         <item name="android:layout_height">50dp</item>
+        <item name="android:backgroundTint">@color/main</item>
         <item name="android:layout_alignParentRight">true </item>
         <item name="android:layout_marginBottom">10sp</item>
         <item name="android:layout_marginRight">10sp</item>
     </style>
+
 </resources>

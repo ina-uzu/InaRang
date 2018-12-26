@@ -1,5 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@color/white">
 
+    <ImageView
+        style="@style/title"
+        android:id="@+id/title"
+        android:src="@drawable/mailbox_title"/>
+
+    <LinearLayout
+        style="@style/body"
+        android:layout_marginBottom="30sp"
+        android:background="@drawable/round">
+
+        <ListView
+            android:id="@+id/lettetlist"
+            android:layout_margin="10sp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </ListView>
+    </LinearLayout>
 </RelativeLayout>
