@@ -30,6 +30,7 @@ import java.util.List;
 import java.util.Locale;
 
 public class CalendarActivity extends FabActivity {
+    DBCalendarHelper db;
     TextView tv_month;
     GridView gridView;
 
@@ -45,6 +46,7 @@ public class CalendarActivity extends FabActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
 
+        db = new DBCalendarHelper(this);
         setFab(this);
 
         tv_month = findViewById(R.id.tv_month);
@@ -68,6 +70,7 @@ public class CalendarActivity extends FabActivity {
 
         /* Grid View Setting */
         list = new ArrayList<CalendarItem>();
+
         cal = Calendar.getInstance();
         cal.set(Calendar.YEAR, Calendar.MONTH, Calendar.DATE);
         int dayNum = cal.get(Calendar.DAY_OF_WEEK);
@@ -79,7 +82,8 @@ public class CalendarActivity extends FabActivity {
             }
         }
 
-        setCalendarDate(cal.get(Calendar.MONTH) + 1);
+        //setCalendarDate(cal.get(Calendar.MONTH) + 1);
+        list = db.contstructCalendarList(y,m,cal.getActualMaximum(Calendar.DAY_OF_MONTH));
         gridViewAdapter = new GridViewAdapter(getApplicationContext(), list);
         gridView.setAdapter(gridViewAdapter);
 
@@ -103,11 +107,16 @@ public class CalendarActivity extends FabActivity {
                 et_cont.setHint("무엇을 하나요?");
                 et_cont.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
 
+
+
                 AlertDialog.Builder dialog = new AlertDialog.Builder(CalendarActivity.this);
                 dialog.setTitle("일정을 추가해요!").setView(et_cont).setPositiveButton("추가쟝구", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         String cont = et_cont.getText().toString();
+                        int y = list.get(position).y;
+                        int m = list.get(position).m;
+                        int d = list.get(position).d;
 
                         if( cont.length()>0){
                             if(LoginInfo.getWho()==LoginInfo.ina)
@@ -118,6 +127,13 @@ public class CalendarActivity extends FabActivity {
 
                             ScheduleItem scheduleItem = new ScheduleItem(LoginInfo.getWho(), cont);
                             list.get(position).addSchedule(scheduleItem);
+
+                            db.addCalendarItem(new CalendarInfo(LoginInfo.getWho(),y,m,d,cont));
+
+                            /* New List */
+                            list = db.contstructCalendarList(y,m,cal.getActualMaximum(Calendar.DAY_OF_MONTH));
+                            gridViewAdapter = new GridViewAdapter(getApplicationContext(), list);
+                            gridView.setAdapter(gridViewAdapter);
 
                             listViewAdapter = new ListViewAdapter(getApplicationContext(), list.get(position).schedList);
                             listView.setAdapter(listViewAdapter);

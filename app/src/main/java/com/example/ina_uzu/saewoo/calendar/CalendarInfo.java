@@ -4,7 +4,7 @@ import com.example.ina_uzu.saewoo.login.LoginInfo;
 
 public class CalendarInfo {
     private int id;
-    private int writer = LoginInfo.getWho();
+    private int who = LoginInfo.getWho();
     private int year;
     private int month;
     private int date;
@@ -27,6 +27,13 @@ public class CalendarInfo {
         this.sched = sched;
     }
 
+    public CalendarInfo(int who, int year, int month , int date, String sched){
+        this.who=who;
+        this.date=date;
+        this.month = month;
+        this.year = year;
+        this.sched = sched;
+    }
     public int getId(){
         return id;
     }
@@ -43,8 +50,8 @@ public class CalendarInfo {
         return date;
     }
 
-    public int getWriter(){
-        return writer;
+    public int getWho(){
+        return who;
     }
 
     public  String getSched(){
@@ -55,8 +62,8 @@ public class CalendarInfo {
         this.id = id;
     }
 
-    public void setWriter(int writer) {
-        this.writer = writer;
+    public void setWho(int writer) {
+        this.who = writer;
     }
 
     public void setYear(int year) {
