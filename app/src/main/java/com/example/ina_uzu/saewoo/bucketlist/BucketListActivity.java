@@ -37,9 +37,7 @@ public class BucketListActivity extends Activity {
 
         /* LIST VIEW */
         listView = findViewById(R.id.bucketlist);
-        list = db.getAllBucketListItems();
-        listViewAdapter  = new ListViewAdapter(getApplicationContext(), list);
-        listView.setAdapter(listViewAdapter);
+        setListView();
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -71,6 +69,7 @@ public class BucketListActivity extends Activity {
 
                         if( cont.length()>0){
                             db.addBucketListItem(new BucketListItem(cont));
+                            setListView();  // 새로 업데이트 된 리스트를 사용해서 리스트뷰 다시 설정해줘야 함
                         }
 
                         else{
@@ -82,11 +81,17 @@ public class BucketListActivity extends Activity {
                     public void onClick(DialogInterface dialog, int which) {
 
                     }
-                });
+                }).create().show();
 
             }
         });
 
+    }
+
+    void setListView(){
+        list = db.getAllBucketListItems();
+        listViewAdapter  = new ListViewAdapter(getApplicationContext(), list);
+        listView.setAdapter(listViewAdapter);
     }
 
     private class ListViewAdapter extends BaseAdapter {
