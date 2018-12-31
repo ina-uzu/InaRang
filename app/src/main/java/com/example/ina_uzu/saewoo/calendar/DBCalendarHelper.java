@@ -64,6 +64,8 @@ public class DBCalendarHelper extends SQLiteOpenHelper {
         values.put(KEY_DATE, listItem.getDate());
         values.put(KEY_CONTENT, listItem.getSched());
 
+        Log.d("ADDDDDDDDDDDDDD_DB", String.valueOf(listItem.getDate()));
+
         db.insert(TABLE_NAME, null, values);
         db.close();
     }
@@ -129,6 +131,11 @@ public class DBCalendarHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    public void deleteAll(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("delete from "+ TABLE_NAME);
+    }
+
     public int getCalendarCount() {
         String countQuery = "SELECT  * FROM " + TABLE_NAME;
         SQLiteDatabase db = this.getReadableDatabase();
@@ -148,8 +155,6 @@ public class DBCalendarHelper extends SQLiteOpenHelper {
         Cursor cursor = db.query(TABLE_NAME, new String[]{KEY_ID,KEY_WHO,KEY_YEAR,KEY_MONTH,KEY_DATE,KEY_CONTENT}, whereClause,
                 new String[] {String.valueOf(year), String.valueOf(month), String.valueOf(date)}, null, null, null, null);
 
-        Log.d("INA", String.valueOf(cursor.getCount()));
-
         if (cursor.moveToFirst()) {
             do {
                 ScheduleItem listItem = new ScheduleItem(Integer.parseInt(cursor.getString(1)), cursor.getString(5));
@@ -167,12 +172,48 @@ public class DBCalendarHelper extends SQLiteOpenHelper {
         calendarItem.jaewoo=jaewoo;
     }
 
+    public void addSchedList2(int year, int month, int date, CalendarItem calendarItem){
+        boolean ina=false, jaewoo=false;
+        List<ScheduleItem> list= new ArrayList<>();
+
+        String selectQuery = "SELECT  * FROM " + TABLE_NAME;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        Log.d("INA----", String.valueOf(date));
+
+        int y,m,d;
+        if (cursor.moveToFirst()) {
+            do {
+                y = Integer.parseInt(cursor.getString(2));
+                m = Integer.parseInt(cursor.getString(3));
+                d = Integer.parseInt(cursor.getString(4));
+                Log.d("INA----In LOOP", String.valueOf(d) + " and  "  + String.valueOf(date));
+
+                if( y==year && m==month && d==date) {
+                    Log.d("ADDDDDDDDD_ACTURALLY", String.valueOf(d) + " and  "  + String.valueOf(date));
+                    ScheduleItem listItem = new ScheduleItem(Integer.parseInt(cursor.getString(1)), cursor.getString(5));
+                    list.add(listItem);
+
+                    if (cursor.getString(1).equals("0"))
+                        ina = true;
+                    else
+                        jaewoo = true;
+                }
+            } while (cursor.moveToNext());
+        }
+
+        calendarItem.schedList = list;
+        calendarItem.ina = ina;
+        calendarItem.jaewoo=jaewoo;
+    }
+
     public List<CalendarItem> contstructCalendarList(int year, int month , int last){
         List<CalendarItem> list = new ArrayList<>();
 
         for(int i=1; i<=last; i++){
             CalendarItem calendarItem= new CalendarItem(year, month, i, String.valueOf(i));
-            addSchedList(year,month,i,calendarItem);
+            addSchedList2(year,month,i,calendarItem);
             list.add(calendarItem);
         }
 

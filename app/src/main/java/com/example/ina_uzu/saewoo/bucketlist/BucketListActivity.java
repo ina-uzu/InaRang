@@ -149,6 +149,7 @@ public class BucketListActivity extends FabActivity {
                         public void onClick(DialogInterface dialog, int which) {
                             db.deleteBucketListItem(list.get(position));
                             setListView();
+
                         }
                     }).setNeutralButton("취소쟝구", new DialogInterface.OnClickListener() {
                         @Override

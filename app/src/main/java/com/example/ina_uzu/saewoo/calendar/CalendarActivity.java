@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,8 +27,11 @@ import java.text.SimpleDateFormat;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Locale;
 
 public class CalendarActivity extends FabActivity {
@@ -95,12 +100,21 @@ public class CalendarActivity extends FabActivity {
                 /* Schedule View Setting */
                 prevSelectedItem=selectedItem;
                 selectedItem=position;
+
+                if( selectedItem==prevSelectedItem)
+                    prevSelectedItem=-1;
+
                 gridViewAdapter.notifyDataSetChanged();
 
-                if(list.get(position).schedList!=null && list.get(position).schedList.size()!=0) {
+                if(list.get(position).schedList!=null && list.get(position).schedList.size()!=0)
                     listViewAdapter = new ListViewAdapter(getApplicationContext(), list.get(position).schedList);
-                    listView.setAdapter(listViewAdapter);
+
+                else {
+                    List<ScheduleItem> tmpList = new ArrayList<ScheduleItem>();
+                    listViewAdapter = new ListViewAdapter(getApplicationContext(), tmpList);
                 }
+                listView.setAdapter(listViewAdapter);
+
             }
         });
 
@@ -114,7 +128,6 @@ public class CalendarActivity extends FabActivity {
                 et_cont.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
 
 
-
                 AlertDialog.Builder dialog = new AlertDialog.Builder(CalendarActivity.this);
                 dialog.setTitle("일정을 추가해요!").setView(et_cont).setPositiveButton("추가쟝구", new DialogInterface.OnClickListener() {
                     @Override
@@ -125,16 +138,8 @@ public class CalendarActivity extends FabActivity {
                         int d = list.get(position).d;
 
                         if( cont.length()>0){
-                            if(LoginInfo.getWho()==LoginInfo.ina)
-                                list.get(position).ina=true;
-
-                            else
-                                list.get(position).jaewoo=true;
-
-                            ScheduleItem scheduleItem = new ScheduleItem(LoginInfo.getWho(), cont);
-                            list.get(position).addSchedule(scheduleItem);
-
                             db.addCalendarItem(new CalendarInfo(LoginInfo.getWho(),y,m,d,cont));
+                            Log.d("ADDDDDDD", String.valueOf(d) + " " +cont);
 
                             /* New List */
                             list = db.contstructCalendarList(y,m,cal.getActualMaximum(Calendar.DAY_OF_MONTH));
@@ -143,6 +148,7 @@ public class CalendarActivity extends FabActivity {
 
                             listViewAdapter = new ListViewAdapter(getApplicationContext(), list.get(position).schedList);
                             listView.setAdapter(listViewAdapter);
+
                         }
 
                         else{
@@ -224,7 +230,7 @@ public class CalendarActivity extends FabActivity {
                 convertView.setBackgroundColor(getResources().getColor(R.color.main3));
             }
 
-            if( position == prevSelectedItem){
+            if( prevSelectedItem>=0 && position == prevSelectedItem){
                 convertView.setBackgroundColor(getResources().getColor(R.color.white));
             }
 
