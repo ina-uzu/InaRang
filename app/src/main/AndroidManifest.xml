@@ -20,6 +20,7 @@
         <activity android:name=".letter.LetterReadActivity"></activity>
         <activity android:name=".letter.LetterWriteActivity"></activity>
         <activity android:name=".bucketlist.BucketListActivity"></activity>
+        <activity android:name=".login.InitActivity"></activity>
     </application>
 
 </manifest>

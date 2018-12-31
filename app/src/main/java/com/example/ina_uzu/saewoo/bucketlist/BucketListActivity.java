@@ -14,24 +14,27 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ina_uzu.saewoo.R;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class BucketListActivity extends Activity {
     ListView listView;
     ListViewAdapter listViewAdapter;
-    ArrayList <BucketListItem> list;
+    List <BucketListItem> list;
+    Button bt_add;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bucketlist);
 
-        listView = findViewById(R.id.bucketlist);
-        list = new ArrayList<>();
-        list.add(new BucketListItem("안녕하새우 다 만들기"));
-        list.add(new BucketListItem("내일 일찍 일어나기"));
+        /* DB */
+        DBBucketlistHelper db = new DBBucketlistHelper(this);
+        db.addBucketListItem(new BucketListItem("안녕하새우 다만들기"));
+        db.addBucketListItem(new BucketListItem("오늘까찌"));
+        db.addBucketListItem(new BucketListItem("트리플렛 과제하기"));
 
+        /* LIST VIEW */
+        listView = findViewById(R.id.bucketlist);
+        list = db.getAllBucketListItems();
         listViewAdapter  = new ListViewAdapter(getApplicationContext(), list);
         listView.setAdapter(listViewAdapter);
 
@@ -41,13 +44,17 @@ public class BucketListActivity extends Activity {
                 Toast.makeText(BucketListActivity.this, "Push "+ String.valueOf(position), Toast.LENGTH_LONG).show();
             }
         });
+
+        /* Add Button */
+        bt_add = findViewById(R.id.bt_add);
+
     }
 
     private class ListViewAdapter extends BaseAdapter {
         private final List<BucketListItem> list;
         private final LayoutInflater inflater;
 
-        private ListViewAdapter(Context context, ArrayList<BucketListItem> list){
+        private ListViewAdapter(Context context, List<BucketListItem> list){
             this.list= list;
             inflater=(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
@@ -81,9 +88,9 @@ public class BucketListActivity extends Activity {
                 holder= (ViewHolder)convertView.getTag();
             }
 
-            if( list.get(position).isChecked)
+            if( list.get(position).getIsChecked())
                 holder.checkbox.setBackground(getResources().getDrawable(R.drawable.check_box_checked));
-            holder.cont.setText(list.get(position).cont);
+            holder.cont.setText(list.get(position).getCont());
 
             return convertView;
         }
