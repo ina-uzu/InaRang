@@ -112,7 +112,7 @@ public class DBLetterHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 int sender = Integer.parseInt(cursor.getString(1));
-                if( sender!=LoginInfo.jaewoo)
+                if( sender!=LoginInfo.ina)
                     continue;;
                 LetterListItem listItem = new LetterListItem();
                 listItem.setId(Integer.parseInt(cursor.getString(0)));
@@ -135,7 +135,7 @@ public class DBLetterHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 int sender = Integer.parseInt(cursor.getString(1));
-                if( sender!=LoginInfo.ina)
+                if( sender!=LoginInfo.jaewoo)
                     continue;;
                 LetterListItem listItem = new LetterListItem();
                 listItem.setId(Integer.parseInt(cursor.getString(0)));

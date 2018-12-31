@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.ina_uzu.saewoo.login.LoginInfo;
@@ -143,8 +144,11 @@ public class DBCalendarHelper extends SQLiteOpenHelper {
         List<ScheduleItem> list= new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
         String whereClause = KEY_YEAR+"=? OR " + KEY_MONTH + "=? OR " + KEY_DATE + "=?";
+
         Cursor cursor = db.query(TABLE_NAME, new String[]{KEY_ID,KEY_WHO,KEY_YEAR,KEY_MONTH,KEY_DATE,KEY_CONTENT}, whereClause,
                 new String[] {String.valueOf(year), String.valueOf(month), String.valueOf(date)}, null, null, null, null);
+
+        Log.d("INA", String.valueOf(cursor.getCount()));
 
         if (cursor.moveToFirst()) {
             do {

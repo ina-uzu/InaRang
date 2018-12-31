@@ -40,6 +40,7 @@ public class CalendarActivity extends FabActivity {
     GridViewAdapter gridViewAdapter;
     List<CalendarItem> list;
     Calendar cal;
+    int selectedItem, prevSelectedItem ;
     int dateCnt=0,y, m, d;
 
     public void onCreate(Bundle savedInstanceState) {
@@ -70,20 +71,20 @@ public class CalendarActivity extends FabActivity {
 
         /* Grid View Setting */
         list = new ArrayList<CalendarItem>();
-
         cal = Calendar.getInstance();
         cal.set(Calendar.YEAR, Calendar.MONTH, Calendar.DATE);
         int dayNum = cal.get(Calendar.DAY_OF_WEEK);
 
+        selectedItem=d-1;
         if(dayNum<7) {
             for (int i = 0; i < dayNum; i++) {
                 list.add(new CalendarItem());
-                dateCnt++;
+                selectedItem++;
             }
         }
 
-        //setCalendarDate(cal.get(Calendar.MONTH) + 1);
         list = db.contstructCalendarList(y,m,cal.getActualMaximum(Calendar.DAY_OF_MONTH));
+
         gridViewAdapter = new GridViewAdapter(getApplicationContext(), list);
         gridView.setAdapter(gridViewAdapter);
 
@@ -92,12 +93,17 @@ public class CalendarActivity extends FabActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 /* Schedule View Setting */
+                prevSelectedItem=selectedItem;
+                selectedItem=position;
+                gridViewAdapter.notifyDataSetChanged();
+
                 if(list.get(position).schedList!=null && list.get(position).schedList.size()!=0) {
                     listViewAdapter = new ListViewAdapter(getApplicationContext(), list.get(position).schedList);
                     listView.setAdapter(listViewAdapter);
                 }
             }
         });
+
 
         /* Add a schedule */
         gridView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -161,9 +167,6 @@ public class CalendarActivity extends FabActivity {
             list.add(new CalendarItem(y,m,d,String.valueOf(i + 1)));
             dateCnt++;
         }
-
-        for(int i=0; i<=dateCnt%7; i++)
-            list.add(new CalendarItem());
     }
 
     public class GridViewAdapter extends BaseAdapter {
@@ -213,8 +216,16 @@ public class CalendarActivity extends FabActivity {
             String sToday = String.valueOf(today);
 
             //오늘 day 텍스트 컬러 변경
-            if (sToday.equals(getItem(position))) {
+            if (sToday.equals(list.get(position).date)){
                 holder.tv_date.setTextColor(getResources().getColor(R.color.main));
+            }
+
+            if( position == selectedItem){
+                convertView.setBackgroundColor(getResources().getColor(R.color.main3));
+            }
+
+            if( position == prevSelectedItem){
+                convertView.setBackgroundColor(getResources().getColor(R.color.white));
             }
 
             if( list.get(position).jaewoo)
