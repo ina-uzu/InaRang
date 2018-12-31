@@ -27,6 +27,7 @@ public class CalendarInfo {
         this.sched = sched;
     }
 
+
     public CalendarInfo(int who, int year, int month , int date, String sched){
         this.who=who;
         this.date=date;

@@ -158,6 +158,7 @@ public class DBCalendarHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 ScheduleItem listItem = new ScheduleItem(Integer.parseInt(cursor.getString(1)), cursor.getString(5));
+                listItem.setId(Integer.parseInt(cursor.getString(0)));
                 list.add(listItem);
 
                 if(cursor.getString(1).equals("0"))
@@ -180,18 +181,14 @@ public class DBCalendarHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
 
-        Log.d("INA----", String.valueOf(date));
-
         int y,m,d;
         if (cursor.moveToFirst()) {
             do {
                 y = Integer.parseInt(cursor.getString(2));
                 m = Integer.parseInt(cursor.getString(3));
                 d = Integer.parseInt(cursor.getString(4));
-                Log.d("INA----In LOOP", String.valueOf(d) + " and  "  + String.valueOf(date));
 
                 if( y==year && m==month && d==date) {
-                    Log.d("ADDDDDDDDD_ACTURALLY", String.valueOf(d) + " and  "  + String.valueOf(date));
                     ScheduleItem listItem = new ScheduleItem(Integer.parseInt(cursor.getString(1)), cursor.getString(5));
                     list.add(listItem);
 
@@ -218,6 +215,13 @@ public class DBCalendarHelper extends SQLiteOpenHelper {
         }
 
         return list;
+    }
+
+    public void deleteCalendarItemById(int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_NAME, KEY_ID + " = ?",
+                new String[] { String.valueOf(id) });
+        db.close();
     }
 }
 

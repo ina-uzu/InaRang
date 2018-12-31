@@ -142,13 +142,7 @@ public class CalendarActivity extends FabActivity {
                             Log.d("ADDDDDDD", String.valueOf(d) + " " +cont);
 
                             /* New List */
-                            list = db.contstructCalendarList(y,m,cal.getActualMaximum(Calendar.DAY_OF_MONTH));
-                            gridViewAdapter = new GridViewAdapter(getApplicationContext(), list);
-                            gridView.setAdapter(gridViewAdapter);
-
-                            listViewAdapter = new ListViewAdapter(getApplicationContext(), list.get(position).schedList);
-                            listView.setAdapter(listViewAdapter);
-
+                            setViews(position);
                         }
 
                         else{
@@ -167,12 +161,14 @@ public class CalendarActivity extends FabActivity {
             }
         });
     }
-    private void setCalendarDate(int month) {
-        cal.set(Calendar.MONTH, month - 1);
-        for (int i = 0; i < cal.getActualMaximum(Calendar.DAY_OF_MONTH); i++) {
-            list.add(new CalendarItem(y,m,d,String.valueOf(i + 1)));
-            dateCnt++;
-        }
+
+    void setViews(int position){
+        list = db.contstructCalendarList(y,m,cal.getActualMaximum(Calendar.DAY_OF_MONTH));
+        gridViewAdapter = new GridViewAdapter(getApplicationContext(), list);
+        gridView.setAdapter(gridViewAdapter);
+
+        listViewAdapter = new ListViewAdapter(getApplicationContext(), list.get(position).schedList);
+        listView.setAdapter(listViewAdapter);
     }
 
     public class GridViewAdapter extends BaseAdapter {
@@ -239,6 +235,7 @@ public class CalendarActivity extends FabActivity {
 
             if(list.get(position).ina)
                 holder.tv_ina.setBackgroundColor(getResources().getColor(R.color.ina));
+
             return convertView;
         }
     }
@@ -274,7 +271,7 @@ public class CalendarActivity extends FabActivity {
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(final int position, View convertView, ViewGroup parent) {
             SchedViewHolder holder = null;
             if( convertView==null){
                 convertView = inflater.inflate(R.layout.item_schedules,parent,false);
@@ -296,6 +293,28 @@ public class CalendarActivity extends FabActivity {
             else{
                 holder.who.setBackgroundColor(getResources().getColor(R.color.jaewoo));
             }
+
+            holder.cont.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(CalendarActivity.this);
+
+                    String title = "삭제하시겠습니까?";
+                    dialog.setTitle(title).setPositiveButton("네네쟝구", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            db.deleteCalendarItemById(list.get(position).getId());
+                            setViews(position);
+
+                        }
+                    }).setNeutralButton("취소쟝구", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    }).create().show();
+                }
+            });
 
             return convertView;
         }
