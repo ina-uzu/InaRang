@@ -11,21 +11,87 @@
         android:id="@+id/title"
         android:src="@drawable/calendar_title"/>
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/tv_month"
         android:layout_below="@+id/title"
-        android:layout_marginTop="10sp"
+        style="@style/text_title"
+        android:textSize="20sp"
+        android:layout_marginBottom="5sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"/>
+
+    <LinearLayout
+        android:layout_below="@+id/tv_month"
         android:layout_marginHorizontal="20sp"
+        android:layout_marginBottom="20sp"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <LinearLayout
+            android:layout_marginHorizontal="5sp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/text_calendar"
+                android:layout_width="0sp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Mon"/>
+            <TextView
+                style="@style/text_calendar"
+                android:layout_width="0sp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Tue"/>
+            <TextView
+                style="@style/text_calendar"
+                android:layout_width="0sp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Wed"/>
+            <TextView
+                style="@style/text_calendar"
+                android:layout_width="0sp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Thu"/>
+            <TextView
+                style="@style/text_calendar"
+                android:layout_width="0sp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Fri"/>
+            <TextView
+                style="@style/text_calendar"
+                android:textColor="@color/sat"
+                android:layout_width="0sp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Sat"/>
+
+            <TextView
+                style="@style/text_calendar"
+                android:textColor="@color/sun"
+                android:layout_width="0sp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Sun"/>
+
+        </LinearLayout>
+
         <GridView
+            android:background="#eeeeee"
             android:id="@+id/calendar_view"
-            android:background="@drawable/round"
             android:layout_margin="5sp"
+            android:numColumns="7"
             android:layout_width="match_parent"
             android:layout_height="0sp"
             android:layout_weight="5">
+
         </GridView>
 
         <ListView

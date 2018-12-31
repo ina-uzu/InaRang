@@ -27,6 +27,13 @@
     </style>
 
     <!-- Font -->
+    <style name="text_calendar">
+        <item name="android:textAlignment">center</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/main2</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
     <style name="text_title">
         <item name = "android:textColor">@color/main</item>
         <item name="android:textSize">30sp</item>
@@ -44,6 +51,8 @@
         <item name="android:textColor">@color/main2</item>
         <item name="android:textSize">25sp</item>
     </style>
+
+
     <!-- Buttons -->
     <style name="button_normal">
         <item name="android:background">@drawable/button_round</item>

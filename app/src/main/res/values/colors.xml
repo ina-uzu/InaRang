@@ -10,5 +10,8 @@
     <color name="titleText">#444444</color>
     <color name="normText">#7f7f7f</color>
     <color name="white">#FFFFFF</color>
-
+    <color name="ina">#ffc1ec</color>
+    <color name="jaewoo">#a5daff</color>
+    <color name="sat">#272c35</color>
+    <color name="sun">#3e2d2d</color>
 </resources>
