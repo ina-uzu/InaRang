@@ -58,9 +58,4 @@
         android:id="@+id/fab4"
         android:layout_above="@+id/fab3"/>
 
-    <android.support.design.widget.FloatingActionButton
-        style="@style/fab_normal"
-        android:id="@+id/fab5"
-        android:layout_above="@+id/fab4"/>
-
 </RelativeLayout>

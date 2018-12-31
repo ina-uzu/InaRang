@@ -1,6 +1,5 @@
 package com.example.ina_uzu.saewoo.letter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,14 +10,14 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.ina_uzu.saewoo.R;
+import com.example.ina_uzu.saewoo.fab.FabActivity;
 import com.example.ina_uzu.saewoo.login.LoginInfo;
 
 import java.util.List;
 
-public class LetterListActivity extends Activity {
+public class LetterListActivity extends FabActivity {
     DBLetterHelper db;
     ListView listView;
     ListViewAdapter listViewAdapter;
@@ -29,6 +28,7 @@ public class LetterListActivity extends Activity {
         setContentView(R.layout.activity_letterread);
 
         db = new DBLetterHelper(this);
+        setFab(this);
 
         listView = findViewById(R.id.lettetlist);
         setListView();

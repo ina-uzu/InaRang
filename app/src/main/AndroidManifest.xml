@@ -16,7 +16,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".main.MainActivity"></activity>
         <activity android:name=".calendar.CalendarActivity"></activity>
+        <activity android:name=".letter.LetterMenuActivity"></activity>
         <activity android:name=".letter.LetterListActivity"></activity>
         <activity android:name=".letter.LetterWriteActivity"></activity>
         <activity android:name=".letter.LetterReadActivity"></activity>

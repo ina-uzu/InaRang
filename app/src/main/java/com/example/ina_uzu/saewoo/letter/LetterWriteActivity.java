@@ -1,6 +1,6 @@
 package com.example.ina_uzu.saewoo.letter;
 
-import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -8,14 +8,15 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.ina_uzu.saewoo.R;
+import com.example.ina_uzu.saewoo.fab.FabActivity;
 import com.example.ina_uzu.saewoo.login.LoginInfo;
+import com.example.ina_uzu.saewoo.main.MainActivity;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-public class LetterWriteActivity extends Activity {
+public class LetterWriteActivity extends FabActivity {
     EditText et_title, et_cont;
     Button bt_send;
     DBLetterHelper db;
@@ -25,6 +26,7 @@ public class LetterWriteActivity extends Activity {
         setContentView(R.layout.activity_letterwrite);
 
         db = new DBLetterHelper(this);
+        setFab(this);
 
         et_title = findViewById(R.id.et_title);
         et_cont = findViewById(R.id.et_cont);
@@ -45,7 +47,10 @@ public class LetterWriteActivity extends Activity {
                     String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
                     LetterListItem listItem = new LetterListItem(LoginInfo.getWho(),Integer.parseInt(date), title, cont );
                     db.addLetterListItem(listItem);
+
                     Toast.makeText(LetterWriteActivity.this, date + " 우주의 편지가 보내졌어요:)", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(LetterWriteActivity.this, MainActivity.class);
+                    startActivity(intent);
 
                 }
             }

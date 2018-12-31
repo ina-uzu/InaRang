@@ -1,6 +1,7 @@
 package com.example.ina_uzu.saewoo.letter;
 
-import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,13 +11,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ina_uzu.saewoo.R;
+import com.example.ina_uzu.saewoo.fab.FabActivity;
 import com.example.ina_uzu.saewoo.login.LoginInfo;
 
-public class LetterReadActivity extends Activity{
+public class LetterReadActivity extends FabActivity {
     DBLetterHelper db;
     ImageView img_title;
     TextView tv_date, tv_title, tv_cont;
-    Button bt_prev;
+    Button bt_prev,bt_del;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,20 +26,23 @@ public class LetterReadActivity extends Activity{
         final Intent intent = getIntent();
 
         db = new DBLetterHelper(this);
+        setFab(this);
 
         img_title = findViewById(R.id.title);
         tv_date = findViewById(R.id.tv_date);
         tv_title = findViewById(R.id.tv_title);
         tv_cont = findViewById(R.id.tv_cont);
         bt_prev = findViewById(R.id.bt_prev);
+        bt_del = findViewById(R.id.bt_del);
+
+        final Intent intent2 = new Intent(LetterReadActivity.this, LetterListActivity.class);
 
         /* Get a Letter Item from db */
         int id = intent.getIntExtra("id", 0);
-        LetterListItem listItem = db.getLetterListItem(id);
+        final LetterListItem listItem = db.getLetterListItem(id);
 
         if( listItem ==null) {
             Toast.makeText(LetterReadActivity.this,"편지를 읽을 수 없네요:(", Toast.LENGTH_SHORT).show();
-            Intent intent2 = new Intent(LetterReadActivity.this, LetterListActivity.class);
             startActivity(intent2);
         }
 
@@ -53,8 +58,29 @@ public class LetterReadActivity extends Activity{
         bt_prev.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent2 = new Intent(LetterReadActivity.this, LetterListActivity.class);
                 startActivity(intent2);
+            }
+        });
+
+        bt_del.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder dialog = new AlertDialog.Builder(LetterReadActivity.this);
+
+                String title = "삭제하시겠습니까?";
+                dialog.setTitle(title).setPositiveButton("네네쟝구", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        db.deleteLetterListItem(listItem);
+                        Toast.makeText(LetterReadActivity.this, "이 편지는 영영 안녕이에요!", Toast.LENGTH_SHORT);
+                        startActivity(intent2);
+                    }
+                }).setNeutralButton("취소쟝구", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                }).create().show();
             }
         });
     }

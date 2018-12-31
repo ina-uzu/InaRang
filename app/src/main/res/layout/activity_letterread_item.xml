@@ -11,7 +11,7 @@
 
     <LinearLayout
         style="@style/body"
-        android:layout_above="@+id/bt_prev"
+        android:layout_above="@+id/bottom"
         android:layout_marginBottom="30sp"
         android:background="@drawable/round">
 
@@ -50,13 +50,50 @@
 
     </LinearLayout>
 
-    <Button
-        style="@style/button_normal"
-        android:id="@+id/bt_prev"
-        android:layout_alignParentBottom="true"
+    <LinearLayout
+        android:id="@+id/bottom"
         android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
         android:layout_marginBottom="20sp"
+        android:orientation="horizontal"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="돌아가기"/>
+        android:layout_height="wrap_content">
+
+        <Button
+            style="@style/button_normal"
+            android:id="@+id/bt_del"
+            android:layout_margin="5sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="삭제하기"/>
+
+        <Button
+            style="@style/button_normal"
+            android:id="@+id/bt_prev"
+            android:layout_margin="5sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="돌아가기"/>
+    </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        style="@style/fab_normal"
+        android:id="@+id/fab"
+        android:layout_marginBottom="20sp"
+        android:layout_alignParentBottom="true" />
+
+    <android.support.design.widget.FloatingActionButton
+        style="@style/fab_normal"
+        android:id="@+id/fab2"
+        android:layout_above="@+id/fab"/>
+
+    <android.support.design.widget.FloatingActionButton
+        style="@style/fab_normal"
+        android:id="@+id/fab3"
+        android:layout_above="@+id/fab2"/>
+
+    <android.support.design.widget.FloatingActionButton
+        style="@style/fab_normal"
+        android:id="@+id/fab4"
+        android:layout_above="@+id/fab3"/>
 </RelativeLayout>

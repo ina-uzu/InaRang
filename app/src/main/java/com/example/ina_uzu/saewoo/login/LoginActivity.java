@@ -10,15 +10,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.ina_uzu.saewoo.calendar.CalendarActivity;
 import com.example.ina_uzu.saewoo.R;
+import com.example.ina_uzu.saewoo.main.MainActivity;
 
 public class LoginActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
 
         final EditText et_id = findViewById(R.id.et_id);
         final EditText et_pwd= findViewById(R.id.et_pwd);
@@ -30,7 +30,7 @@ public class LoginActivity extends Activity {
         bt_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, CalendarActivity.class);
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 String id = et_id.getText().toString();
                 String pwd = et_pwd.getText().toString();
 

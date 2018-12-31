@@ -11,46 +11,35 @@
         <ImageView
             style="@style/title"
             android:id="@+id/title"
-            android:layout_above="@+id/body"
             android:layout_marginBottom="10sp"
-            android:src="@drawable/menu_title"/>
+            android:src="@drawable/letter_menu_title"/>
 
         <LinearLayout
-            android:id="@+id/body"
+            android:layout_below="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
             android:layout_centerHorizontal="true"
             android:layout_marginHorizontal="60sp"
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/bt_cal"
+                android:id="@+id/bt_send"
                 style="@style/text_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10sp"
                 android:background="@drawable/round"
-                android:text="Calendar" />
+                android:text="Send" />
 
             <TextView
-                android:id="@+id/bt_letter"
+                android:id="@+id/bt_read"
                 style="@style/text_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10sp"
                 android:background="@drawable/round"
-                android:text="Letters" />
-
-            <TextView
-                android:id="@+id/bt_bucket"
-                style="@style/text_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10sp"
-                android:background="@drawable/round"
-                android:text="Bucket List" />
-
+                android:text="Read" />
         </LinearLayout>
     </LinearLayout>
+
 </RelativeLayout>

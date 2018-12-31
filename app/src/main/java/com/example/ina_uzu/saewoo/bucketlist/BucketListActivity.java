@@ -1,6 +1,5 @@
 package com.example.ina_uzu.saewoo.bucketlist;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -8,7 +7,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,11 +15,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ina_uzu.saewoo.R;
+import com.example.ina_uzu.saewoo.fab.FabActivity;
 import com.example.ina_uzu.saewoo.login.LoginInfo;
 
 import java.util.List;
 
-public class BucketListActivity extends Activity {
+public class BucketListActivity extends FabActivity {
     DBBucketlistHelper db;
     ListView listView;
     ListViewAdapter listViewAdapter;
@@ -34,6 +33,7 @@ public class BucketListActivity extends Activity {
 
         /* DB */
         db = new DBBucketlistHelper(this);
+        setFab(this);
 
         /* LIST VIEW */
         listView = findViewById(R.id.bucketlist);
