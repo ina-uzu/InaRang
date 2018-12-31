@@ -1,7 +1,9 @@
 package com.example.ina_uzu.saewoo.bucketlist;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,14 +11,18 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ina_uzu.saewoo.R;
+import com.example.ina_uzu.saewoo.login.LoginInfo;
+
 import java.util.List;
 
 public class BucketListActivity extends Activity {
+    DBBucketlistHelper db;
     ListView listView;
     ListViewAdapter listViewAdapter;
     List <BucketListItem> list;
@@ -27,10 +33,7 @@ public class BucketListActivity extends Activity {
         setContentView(R.layout.activity_bucketlist);
 
         /* DB */
-        DBBucketlistHelper db = new DBBucketlistHelper(this);
-        db.addBucketListItem(new BucketListItem("안녕하새우 다만들기"));
-        db.addBucketListItem(new BucketListItem("오늘까찌"));
-        db.addBucketListItem(new BucketListItem("트리플렛 과제하기"));
+        db = new DBBucketlistHelper(this);
 
         /* LIST VIEW */
         listView = findViewById(R.id.bucketlist);
@@ -47,6 +50,42 @@ public class BucketListActivity extends Activity {
 
         /* Add Button */
         bt_add = findViewById(R.id.bt_add);
+        bt_add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                final EditText et_cont = new EditText(BucketListActivity.this);
+                et_cont.setHint("내용을 적어주세요");
+
+                AlertDialog.Builder dialog = new AlertDialog.Builder(BucketListActivity.this);
+                String title = "가 우주 하고 싶은 것";
+                if(LoginInfo.getWho()==LoginInfo.ina)
+                    title = "이나"+title;
+                else
+                    title = "새우"+title;
+
+                dialog.setTitle(title).setView(et_cont).setPositiveButton("추가쟝구", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String cont = et_cont.getText().toString();
+
+                        if( cont.length()>0){
+                            db.addBucketListItem(new BucketListItem(cont));
+                        }
+
+                        else{
+                            Toast.makeText(BucketListActivity.this, "아무것도 안 적으면 안되요 :(", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }).setNegativeButton("취소쟝구", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+
+            }
+        });
 
     }
 

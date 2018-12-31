@@ -7,8 +7,8 @@ public class LoginInfo {
     private static String jaewooPWD = "jaewoo118";
     private static int who;
 
-    final static int ina =0;
-    final static int jaewoo=1;
+    public final static int ina =0;
+    public final static int jaewoo=1;
 
     public static String getInaID(){
         return inaID;
