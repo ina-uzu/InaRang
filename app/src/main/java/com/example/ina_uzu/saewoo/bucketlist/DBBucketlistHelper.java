@@ -35,7 +35,6 @@ public class DBBucketlistHelper extends SQLiteOpenHelper {
                 + KEY_DONE + " INTEGER" + ")";
 
         db.execSQL(CREATE_CONTACTS_TABLE);
-        Toast.makeText(context, "TABLE CREATED", Toast.LENGTH_SHORT).show();
     }
 
     @Override

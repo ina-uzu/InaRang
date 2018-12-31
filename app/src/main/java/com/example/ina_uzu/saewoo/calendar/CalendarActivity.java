@@ -10,10 +10,8 @@ import android.view.animation.AnimationUtils;
 
 import com.example.ina_uzu.saewoo.R;
 import com.example.ina_uzu.saewoo.bucketlist.BucketListActivity;
-import com.example.ina_uzu.saewoo.letter.LetterReadActivity;
+import com.example.ina_uzu.saewoo.letter.LetterListActivity;
 import com.example.ina_uzu.saewoo.letter.LetterWriteActivity;
-
-import java.util.Calendar;
 
 public class CalendarActivity extends Activity implements View.OnClickListener{
     Boolean openFlag = false;
@@ -100,7 +98,7 @@ public class CalendarActivity extends Activity implements View.OnClickListener{
 
             /* 편지 읽기 */
             case R.id.fab4:
-                intent = new Intent(CalendarActivity.this, LetterReadActivity.class);
+                intent = new Intent(CalendarActivity.this, LetterListActivity.class);
                 startActivity(intent);
                 break;
 
