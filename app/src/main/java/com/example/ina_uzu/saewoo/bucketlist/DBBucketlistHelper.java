@@ -119,14 +119,14 @@ public class DBBucketlistHelper extends SQLiteOpenHelper {
         return db.update(TABLE_NAME,values, KEY_ID+" =?", new String[]{ String.valueOf(listItem.getId())});
     }
 
-    public void deleteContact(BucketListItem listItem) {
+    public void deleteBucketListItem(BucketListItem listItem) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_NAME, KEY_ID + " = ?",
                 new String[] { String.valueOf(listItem.getId()) });
         db.close();
     }
 
-    public int getContactsCount() {
+    public int getBucketListCount() {
         String countQuery = "SELECT  * FROM " + TABLE_NAME;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);

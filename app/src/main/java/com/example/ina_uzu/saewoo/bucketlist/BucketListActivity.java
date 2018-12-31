@@ -39,13 +39,6 @@ public class BucketListActivity extends Activity {
         listView = findViewById(R.id.bucketlist);
         setListView();
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(BucketListActivity.this, "Push "+ String.valueOf(position), Toast.LENGTH_LONG).show();
-            }
-        });
-
         /* Add Button */
         bt_add = findViewById(R.id.bt_add);
         bt_add.setOnClickListener(new View.OnClickListener() {
@@ -54,6 +47,7 @@ public class BucketListActivity extends Activity {
 
                 final EditText et_cont = new EditText(BucketListActivity.this);
                 et_cont.setHint("내용을 적어주세요");
+                et_cont.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
 
                 AlertDialog.Builder dialog = new AlertDialog.Builder(BucketListActivity.this);
                 String title = "가 우주 하고 싶은 것";
@@ -119,7 +113,7 @@ public class BucketListActivity extends Activity {
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(final int position, View convertView, ViewGroup parent) {
             ViewHolder holder = null;
             if( convertView==null){
                 convertView = inflater.inflate(R.layout.item_bucketlist,parent,false);
@@ -132,8 +126,43 @@ public class BucketListActivity extends Activity {
                 holder= (ViewHolder)convertView.getTag();
             }
 
-            if( list.get(position).getIsChecked())
+            holder.checkbox.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    boolean cheked = list.get(position).getIsChecked();
+                    list.get(position).setChecked(!cheked);
+
+                    //db table 수정 및 새로운 리스트로 출력 내용 동기화
+                    db.updateBucketListItem(list.get(position));
+                    setListView();
+                }
+            });
+
+            holder.cont.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(BucketListActivity.this);
+
+                    String title = "삭제하시겠습니까?";
+                    dialog.setTitle(title).setPositiveButton("네네쟝구", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            db.deleteBucketListItem(list.get(position));
+                            setListView();
+                        }
+                    }).setNeutralButton("취소쟝구", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    }).create().show();
+                }
+            });
+
+            if( list.get(position).getIsChecked()) {
                 holder.checkbox.setBackground(getResources().getDrawable(R.drawable.check_box_checked));
+            }
+
             holder.cont.setText(list.get(position).getCont());
 
             return convertView;
