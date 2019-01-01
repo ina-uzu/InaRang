@@ -46,7 +46,7 @@ public class CalendarActivity extends FabActivity {
     List<CalendarItem> list;
     Calendar cal;
     int selectedItem, prevSelectedItem ;
-    int dateCnt=0,y, m, d;
+    int dayNum,y, m, d;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,18 +77,17 @@ public class CalendarActivity extends FabActivity {
         /* Grid View Setting */
         list = new ArrayList<CalendarItem>();
         cal = Calendar.getInstance();
-        cal.set(Calendar.YEAR, Calendar.MONTH, Calendar.DATE);
-        int dayNum = cal.get(Calendar.DAY_OF_WEEK);
 
-        selectedItem=d-1;
-        if(dayNum<7) {
-            for (int i = 0; i < dayNum; i++) {
-                list.add(new CalendarItem());
-                selectedItem++;
-            }
-        }
+        cal.set(Calendar.YEAR, y);
+        cal.set(Calendar.MONTH, m-1);
+        cal.set(Calendar.DATE, 1);
 
-        list = db.contstructCalendarList(y,m,cal.getActualMaximum(Calendar.DAY_OF_MONTH));
+        dayNum = cal.get(Calendar.DAY_OF_WEEK)-2;
+        Log.d("HELLODJSDAJKDHKSJDJASK", String.valueOf(dayNum));
+
+        list = db.contstructCalendarList(y,m,cal.getActualMaximum(Calendar.DAY_OF_MONTH),dayNum);
+
+        selectedItem=d-1+dayNum;
 
         gridViewAdapter = new GridViewAdapter(getApplicationContext(), list);
         gridView.setAdapter(gridViewAdapter);
@@ -139,7 +138,6 @@ public class CalendarActivity extends FabActivity {
 
                         if( cont.length()>0){
                             db.addCalendarItem(new CalendarInfo(LoginInfo.getWho(),y,m,d,cont));
-                            Log.d("ADDDDDDD", String.valueOf(d) + " " +cont);
 
                             /* New List */
                             setViews(position);
@@ -163,7 +161,7 @@ public class CalendarActivity extends FabActivity {
     }
 
     void setViews(int position){
-        list = db.contstructCalendarList(y,m,cal.getActualMaximum(Calendar.DAY_OF_MONTH));
+        list = db.contstructCalendarList(y,m,cal.getActualMaximum(Calendar.DAY_OF_MONTH), dayNum);
         gridViewAdapter = new GridViewAdapter(getApplicationContext(), list);
         gridView.setAdapter(gridViewAdapter);
 

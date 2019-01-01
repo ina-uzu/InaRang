@@ -205,8 +205,12 @@ public class DBCalendarHelper extends SQLiteOpenHelper {
         calendarItem.jaewoo=jaewoo;
     }
 
-    public List<CalendarItem> contstructCalendarList(int year, int month , int last){
+    public List<CalendarItem> contstructCalendarList(int year, int month , int last, int dayNum){
         List<CalendarItem> list = new ArrayList<>();
+
+        for (int i = 0; i <dayNum; i++) {
+            list.add(new CalendarItem());
+        }
 
         for(int i=1; i<=last; i++){
             CalendarItem calendarItem= new CalendarItem(year, month, i, String.valueOf(i));

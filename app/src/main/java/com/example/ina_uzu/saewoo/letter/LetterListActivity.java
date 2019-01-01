@@ -92,7 +92,10 @@ public class LetterListActivity extends FabActivity {
                 holder= (ViewHolder)convertView.getTag();
             }
 
-            String date_str = String.valueOf(list.get(position).getDate());
+            int tmp = list.get(position).getDate();
+            String date_str = String.valueOf((tmp%10000)/100);
+            date_str = date_str + "/" + String.valueOf(tmp%100);
+
             holder.date.setText(date_str);
             holder.title.setText(list.get(position).getTitle());
 
