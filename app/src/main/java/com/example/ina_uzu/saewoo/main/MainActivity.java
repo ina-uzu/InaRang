@@ -11,10 +11,11 @@ import com.example.ina_uzu.saewoo.R;
 import com.example.ina_uzu.saewoo.bucketlist.BucketListActivity;
 import com.example.ina_uzu.saewoo.calendar.CalendarActivity;
 import com.example.ina_uzu.saewoo.letter.LetterMenuActivity;
+import com.example.ina_uzu.saewoo.worktable.WorktableActivity;
 
 public class MainActivity extends Activity {
 
-    TextView bt_letter, bt_bucket, bt_cal;
+    TextView bt_letter, bt_bucket, bt_cal,bt_worktable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +23,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         bt_cal = findViewById(R.id.bt_cal);
+        bt_worktable = findViewById(R.id.bt_worktable);
         bt_letter = findViewById(R.id.bt_letter);
         bt_bucket = findViewById(R.id.bt_bucket);
 
@@ -29,6 +31,14 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, CalendarActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        bt_worktable.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, WorktableActivity.class);
                 startActivity(intent);
             }
         });

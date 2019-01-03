@@ -35,6 +35,15 @@
                 android:text="Calendar" />
 
             <TextView
+                android:id="@+id/bt_worktable"
+                style="@style/text_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10sp"
+                android:background="@drawable/round"
+                android:text="Work Table" />
+
+            <TextView
                 android:id="@+id/bt_letter"
                 style="@style/text_button"
                 android:layout_width="match_parent"
