@@ -2,10 +2,11 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_pressed="false">
         <shape android:shape="rectangle">
-            <solid android:color="@color/main"></solid>
+            <solid android:color="@color/main"/>
+            <corners android:radius="10dp" />
             <stroke
                 android:width="1dip"
-                android:color="@color/main2" />
+                android:color="@color/main3" />
             <padding
                 android:bottom="4dp"
                 android:left="4dp"

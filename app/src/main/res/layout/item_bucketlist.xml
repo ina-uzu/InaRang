@@ -8,7 +8,8 @@
 
     <Button
         android:id="@+id/checkbox"
-        android:background="@drawable/check_box"
+        android:layout_marginStart="2sp"
+        android:background="@drawable/nemo"
         android:layout_width="30sp"
         android:layout_height="30sp" />
 

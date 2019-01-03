@@ -161,7 +161,7 @@ public class BucketListActivity extends FabActivity {
             });
 
             if( list.get(position).getIsChecked()) {
-                holder.checkbox.setBackground(getResources().getDrawable(R.drawable.check_box_checked));
+                holder.checkbox.setBackground(getResources().getDrawable(R.drawable.nemo_checked));
             }
 
             holder.cont.setText(list.get(position).getCont());

@@ -7,6 +7,7 @@
     android:layout_height="match_parent">
 
     <ImageView
+        android:layout_marginTop="10sp"
         style="@style/title"
         android:id="@+id/title"
         android:src="@drawable/calendar_title"/>
@@ -15,25 +16,33 @@
         android:id="@+id/tv_month"
         android:layout_below="@+id/title"
         style="@style/text_title"
-        android:textSize="25sp"
-        android:layout_marginBottom="5sp"
+        android:textSize="30sp"
+        android:layout_marginBottom="15sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"/>
 
     <LinearLayout
         android:layout_below="@+id/tv_month"
-        android:layout_marginHorizontal="20sp"
+        android:layout_marginHorizontal="15sp"
         android:layout_marginBottom="20sp"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:layout_marginHorizontal="5sp"
-            android:orientation="horizontal"
+            android:background="@drawable/round"
+            android:weightSum="5"
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="0sp"
+            android:layout_weight="5">
+
+            <LinearLayout
+                android:layout_marginHorizontal="5sp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
             <TextView
                 style="@style/text_calendar"
@@ -79,17 +88,17 @@
                 android:layout_weight="1"
                 android:text="Sun"/>
 
+            </LinearLayout>
+
+            <GridView
+                android:id="@+id/calendar_view"
+                android:layout_marginTop="10sp"
+                android:layout_margin="5sp"
+                android:numColumns="7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </GridView>
         </LinearLayout>
-
-        <GridView
-            android:id="@+id/calendar_view"
-            android:layout_margin="5sp"
-            android:numColumns="7"
-            android:layout_width="match_parent"
-            android:layout_height="0sp"
-            android:layout_weight="5">
-
-        </GridView>
 
         <ListView
             android:layout_margin="5sp"

@@ -207,7 +207,7 @@ public class DBCalendarHelper extends SQLiteOpenHelper {
 
     public List<CalendarItem> contstructCalendarList(int year, int month , int last, int dayNum){
         List<CalendarItem> list = new ArrayList<>();
-
+        int cnt=dayNum+last-1;
         for (int i = 0; i <dayNum; i++) {
             list.add(new CalendarItem());
         }
@@ -217,7 +217,9 @@ public class DBCalendarHelper extends SQLiteOpenHelper {
             addSchedList2(year,month,i,calendarItem);
             list.add(calendarItem);
         }
-
+        for (int i = 0; i <cnt%7; i++) {
+            list.add(new CalendarItem());
+        }
         return list;
     }
 

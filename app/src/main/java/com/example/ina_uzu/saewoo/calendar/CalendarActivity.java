@@ -83,7 +83,6 @@ public class CalendarActivity extends FabActivity {
         cal.set(Calendar.DATE, 1);
 
         dayNum = cal.get(Calendar.DAY_OF_WEEK)-2;
-        Log.d("HELLODJSDAJKDHKSJDJASK", String.valueOf(dayNum));
 
         list = db.contstructCalendarList(y,m,cal.getActualMaximum(Calendar.DAY_OF_MONTH),dayNum);
 
@@ -225,7 +224,8 @@ public class CalendarActivity extends FabActivity {
             }
 
             if( prevSelectedItem>=0 && position == prevSelectedItem){
-                convertView.setBackgroundColor(getResources().getColor(R.color.white));
+                convertView.setSelected(false);
+                convertView.setBackground(getResources().getDrawable(R.drawable.calendar));
             }
 
             if( list.get(position).jaewoo)
