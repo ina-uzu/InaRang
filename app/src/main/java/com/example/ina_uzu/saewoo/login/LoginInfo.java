@@ -4,7 +4,7 @@ public class LoginInfo {
     private static String inaID = "inarang";
     private static String inaPWD = "ina118";
     private static String jaewooID = "jaewoorang";
-    private static String jaewooPWD = "jaewoo118";
+    private static String jaewooPWD = "0906";
     private static int who;
 
     public final static int ina =0;
