@@ -9,6 +9,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.ina_uzu.saewoo.RequestInfo;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -18,7 +19,7 @@ public class LetterPostRequest {
     private String date;
     private String title;
     private String content;
-    private final String url = "http://9422cf14.ngrok.io/letter/";
+    private final String url = RequestInfo.base_url+"letter/";
 
     LetterPostRequest(Context context, int sender, String date, String title, String content){
         this.sender=sender;
