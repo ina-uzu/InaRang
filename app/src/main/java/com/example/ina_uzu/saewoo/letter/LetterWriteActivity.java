@@ -19,13 +19,13 @@ import java.util.Locale;
 public class LetterWriteActivity extends FabActivity {
     EditText et_title, et_cont;
     Button bt_send;
-    DBLetterHelper db;
+    //DBLetterHelper db;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_letterwrite);
 
-        db = new DBLetterHelper(this);
+        //db = new DBLetterHelper(this);
         setFab(this);
 
         et_title = findViewById(R.id.et_title);
@@ -46,9 +46,10 @@ public class LetterWriteActivity extends FabActivity {
                 else{
                     String date = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
                     LetterListItem listItem = new LetterListItem(LoginInfo.getWho(),Integer.parseInt(date), title, cont );
-                    db.addLetterListItem(listItem);
-                    LetterPostRequest postRequest = new LetterPostRequest(getApplicationContext(), LoginInfo.getWho(), date, title,cont);
+                    //db.addLetterListItem(listItem);
+                    //LetterPostRequest postRequest = new LetterPostRequest(getApplicationContext(), LoginInfo.getWho(), date, title,cont);
 
+                    LetterRequest.PostRequest(getApplicationContext(), LoginInfo.getWho(), date, title,cont);
                     Toast.makeText(LetterWriteActivity.this, date + " 우주의 편지가 보내졌어요:)", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(LetterWriteActivity.this, MainActivity.class);
                     startActivity(intent);

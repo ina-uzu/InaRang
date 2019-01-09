@@ -41,6 +41,7 @@ public class LetterListActivity extends FabActivity {
         setContentView(R.layout.activity_letterread);
 
         //db = new DBLetterHelper(this);
+
         setFab(this);
 
         listView = findViewById(R.id.lettetlist);
@@ -50,7 +51,7 @@ public class LetterListActivity extends FabActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent  = new Intent(LetterListActivity.this, LetterReadActivity.class);
-                intent.putExtra("id", list.get(position).getId());
+                intent.putExtra("id", LetterInfo.letterList.get(position).getId());
                 startActivity(intent);
             }
         });
@@ -72,12 +73,7 @@ public class LetterListActivity extends FabActivity {
                e.printStackTrace();
            }
        }
-
-        if(LetterInfo.letterList==null)
-            Log.d("NULL","LETTERLIST");
-        else
-            Log.d("SIZE", String.valueOf(LetterInfo.letterList.size()));
-
+        Log.d("FIN", String.valueOf(LetterInfo.letterList.size()));
         listViewAdapter  = new ListViewAdapter(LetterListActivity.this, LetterInfo.letterList);
         listView.setAdapter(listViewAdapter);
     }
