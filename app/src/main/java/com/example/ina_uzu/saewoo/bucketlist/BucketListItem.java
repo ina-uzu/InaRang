@@ -18,6 +18,11 @@ class BucketListItem {
         this.isChecked=isChecked;
         this.cont=cont;
     }
+    public BucketListItem(int id , String cont, boolean isChecked){
+        this.id = id;
+        this.isChecked=isChecked;
+        this.cont=cont;
+    }
 
     void setId(int i){
         this.id=i;

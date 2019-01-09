@@ -3,6 +3,7 @@ package com.example.ina_uzu.saewoo.letter;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,10 +11,22 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.ina_uzu.saewoo.R;
+import com.example.ina_uzu.saewoo.RequestInfo;
 import com.example.ina_uzu.saewoo.fab.FabActivity;
 import com.example.ina_uzu.saewoo.login.LoginInfo;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -27,7 +40,7 @@ public class LetterListActivity extends FabActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_letterread);
 
-        db = new DBLetterHelper(this);
+        //db = new DBLetterHelper(this);
         setFab(this);
 
         listView = findViewById(R.id.lettetlist);
@@ -44,13 +57,28 @@ public class LetterListActivity extends FabActivity {
     }
 
     void setListView(){
+        /*
         if(LoginInfo.getWho()==LoginInfo.ina)
             list = db.getAllLettersToIna();
 
         else
             list =db.getAllLettersToJaewoo();
+        */
 
-        listViewAdapter  = new ListViewAdapter(LetterListActivity.this, list);
+       if( LetterInfo.letterList==null) {
+           try {
+               Thread.sleep(3000);
+           } catch (InterruptedException e) {
+               e.printStackTrace();
+           }
+       }
+
+        if(LetterInfo.letterList==null)
+            Log.d("NULL","LETTERLIST");
+        else
+            Log.d("SIZE", String.valueOf(LetterInfo.letterList.size()));
+
+        listViewAdapter  = new ListViewAdapter(LetterListActivity.this, LetterInfo.letterList);
         listView.setAdapter(listViewAdapter);
     }
 
@@ -65,6 +93,8 @@ public class LetterListActivity extends FabActivity {
         }
         @Override
         public int getCount() {
+            if(list==null)
+                return -1;
             return list.size();
         }
 

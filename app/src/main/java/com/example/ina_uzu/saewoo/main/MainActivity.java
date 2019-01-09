@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.ina_uzu.saewoo.R;
+import com.example.ina_uzu.saewoo.bucketlist.BucketGetRequest;
 import com.example.ina_uzu.saewoo.bucketlist.BucketListActivity;
 import com.example.ina_uzu.saewoo.calendar.CalendarActivity;
 import com.example.ina_uzu.saewoo.letter.LetterMenuActivity;
@@ -21,6 +22,8 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        BucketGetRequest bucketGetRequest = new BucketGetRequest(getApplicationContext());
 
         bt_cal = findViewById(R.id.bt_cal);
         bt_worktable = findViewById(R.id.bt_worktable);

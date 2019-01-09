@@ -1,8 +1,10 @@
 package com.example.ina_uzu.saewoo.letter;
 
+import org.json.JSONArray;
+
 import java.util.List;
 
 public class LetterInfo {
-    static List<LetterListItem> letterList;
+    public static List<LetterListItem> letterList;
 
 }

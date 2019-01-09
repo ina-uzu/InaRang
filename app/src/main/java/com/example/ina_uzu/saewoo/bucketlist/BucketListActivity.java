@@ -18,21 +18,22 @@ import com.example.ina_uzu.saewoo.R;
 import com.example.ina_uzu.saewoo.fab.FabActivity;
 import com.example.ina_uzu.saewoo.login.LoginInfo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BucketListActivity extends FabActivity {
-    DBBucketlistHelper db;
+    //DBBucketlistHelper db;
     ListView listView;
     ListViewAdapter listViewAdapter;
-    List <BucketListItem> list;
     Button bt_add;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bucketlist);
 
-        /* DB */
-        db = new DBBucketlistHelper(this);
+        /* DB
+        db = new DBBucketlistHelper(this);*/
+
         setFab(this);
 
         /* LIST VIEW */
@@ -62,7 +63,13 @@ public class BucketListActivity extends FabActivity {
                         String cont = et_cont.getText().toString();
 
                         if( cont.length()>0){
-                            db.addBucketListItem(new BucketListItem(cont));
+                            //db.addBucketListItem(new BucketListItem(cont));
+                            BucketPostRequest postRequest = new BucketPostRequest(getApplicationContext(), cont, 0);
+
+                            if(BucketListInfo.bucketList==null){
+                                BucketListInfo.bucketList = new ArrayList<>();
+                            }
+                            BucketListInfo.bucketList.add(new BucketListItem(cont,false));
                             setListView();  // 새로 업데이트 된 리스트를 사용해서 리스트뷰 다시 설정해줘야 함
                         }
 
@@ -83,8 +90,15 @@ public class BucketListActivity extends FabActivity {
     }
 
     void setListView(){
-        list = db.getAllBucketListItems();
-        listViewAdapter  = new ListViewAdapter(getApplicationContext(), list);
+        //list = db.getAllBucketListItems();
+        if( BucketListInfo.bucketList==null){
+            try {
+                Thread.sleep(10000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        listViewAdapter  = new ListViewAdapter(getApplicationContext(), BucketListInfo.bucketList);
         listView.setAdapter(listViewAdapter);
     }
 
@@ -133,7 +147,8 @@ public class BucketListActivity extends FabActivity {
                     list.get(position).setChecked(!cheked);
 
                     //db table 수정 및 새로운 리스트로 출력 내용 동기화
-                    db.updateBucketListItem(list.get(position));
+                    //db.updateBucketListItem(list.get(position));
+
                     setListView();
                 }
             });
@@ -147,7 +162,7 @@ public class BucketListActivity extends FabActivity {
                     dialog.setTitle(title).setPositiveButton("네네쟝구", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            db.deleteBucketListItem(list.get(position));
+                            //db.deleteBucketListItem(list.get(position));
                             setListView();
 
                         }

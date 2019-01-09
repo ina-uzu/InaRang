@@ -1,15 +1,13 @@
-package com.example.ina_uzu.saewoo.letter;
+package com.example.ina_uzu.saewoo.bucketlist;
 
 import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.ina_uzu.saewoo.RequestInfo;
 
@@ -18,12 +16,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class LetterGetRequest {
-    private String url = RequestInfo.base_url + "letter/";
+public class BucketGetRequest {
 
-    LetterGetRequest(Context context){
+    private String url = RequestInfo.base_url + "bucketlist/";
+
+    public BucketGetRequest(Context context){
         RequestQueue queue = Volley.newRequestQueue(context);
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, (JSONArray)null, new Response.Listener<JSONArray>() {
             @Override
@@ -32,30 +30,33 @@ public class LetterGetRequest {
                 Log.d("GET_Response", response.toString());
             }
         },
-            new Response.ErrorListener(){
-                @Override
-                public void onErrorResponse(VolleyError error){
-                    Log.d("GET_Error", error.toString());
-                }
-            });
+                new Response.ErrorListener(){
+                    @Override
+                    public void onErrorResponse(VolleyError error){
+                        Log.d("GET_Error", error.toString());
+                    }
+                });
         queue.add(jsonArrayRequest);
     }
 
     void setLetterList(JSONArray response){
-        LetterInfo.letterList= new ArrayList<LetterListItem>();
+        BucketListInfo.bucketList= new ArrayList<BucketListItem>();
 
         try{
             for(int i=0;i<response.length();i++){
                 JSONObject obj = response.getJSONObject(i);
                 int id = obj.getInt("id");
-                int sender = obj.getInt("sender");
-                String date = obj.getString("date");
-                String title = obj.getString("title");
                 String content= obj.getString("content");
-                LetterInfo.letterList.add(new LetterListItem(id,sender,Integer.parseInt(date),title,content));
+                int done = obj.getInt("done");
+                boolean is_done =false;
+
+                if(done==1)
+                    is_done=true;
+
+                BucketListInfo.bucketList.add(new BucketListItem(id,content, is_done));
             }
         }catch (JSONException e){
             e.printStackTrace();
         }
-   }
+    }
 }
