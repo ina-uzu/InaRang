@@ -49,7 +49,7 @@ public class LetterWriteActivity extends FabActivity {
                     //db.addLetterListItem(listItem);
                     //LetterPostRequest postRequest = new LetterPostRequest(getApplicationContext(), LoginInfo.getWho(), date, title,cont);
 
-                    LetterRequest.PostRequest(getApplicationContext(), LoginInfo.getWho(), date, title,cont);
+                    RequestForLetter.PostRequest(getApplicationContext(), LoginInfo.getWho(), date, title,cont);
                     Toast.makeText(LetterWriteActivity.this, date + " 우주의 편지가 보내졌어요:)", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(LetterWriteActivity.this, MainActivity.class);
                     startActivity(intent);

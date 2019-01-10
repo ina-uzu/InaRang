@@ -15,7 +15,7 @@ public class LetterMenuActivity extends Activity {
         setContentView(R.layout.activity_letter);
 
         //LetterGetRequest letterGetRequest = new LetterGetRequest(getApplicationContext());
-        LetterInfo.letterList=LetterRequest.GetRequest(getApplicationContext());
+        LetterInfo.letterList=RequestForLetter.GetRequest(getApplicationContext());
 
         bt_send = findViewById(R.id.bt_send);
         bt_read = findViewById(R.id.bt_read);

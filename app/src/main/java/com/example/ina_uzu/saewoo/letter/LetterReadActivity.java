@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -85,7 +84,7 @@ public class LetterReadActivity extends FabActivity {
                         //db.deleteLetterListItem(listItem);
 
                         //LetterDeleteRequest letterDeleteRequest = new LetterDeleteRequest(getApplicationContext(),id);
-                        LetterRequest.DeleteRequest(getApplicationContext(),id);
+                        RequestForLetter.DeleteRequest(getApplicationContext(),id);
                         LetterInfo.letterList.remove(cur_id);
 
                         Toast.makeText(LetterReadActivity.this, "이 편지는 영영 안녕이에요!", Toast.LENGTH_SHORT);

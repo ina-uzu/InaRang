@@ -64,7 +64,8 @@ public class BucketListActivity extends FabActivity {
 
                         if( cont.length()>0){
                             //db.addBucketListItem(new BucketListItem(cont));
-                            BucketPostRequest postRequest = new BucketPostRequest(getApplicationContext(), cont, 0);
+                            //BucketPostRequest postRequest = new BucketPostRequest(getApplicationContext(), cont, 0);
+                            RequestForBucket.PostRequest(getApplicationContext(),cont,0);
 
                             if(BucketListInfo.bucketList==null){
                                 BucketListInfo.bucketList = new ArrayList<>();
@@ -148,7 +149,7 @@ public class BucketListActivity extends FabActivity {
 
                     //db table 수정 및 새로운 리스트로 출력 내용 동기화
                     //db.updateBucketListItem(list.get(position));
-
+                    RequestForBucket.PutRequest(getApplicationContext(),list.get(position));
                     setListView();
                 }
             });
@@ -163,7 +164,7 @@ public class BucketListActivity extends FabActivity {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             //db.deleteBucketListItem(list.get(position));
-                            setListView();
+                    setListView();
 
                         }
                     }).setNeutralButton("취소쟝구", new DialogInterface.OnClickListener() {
