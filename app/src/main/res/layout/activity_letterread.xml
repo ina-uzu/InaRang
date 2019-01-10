@@ -15,7 +15,8 @@
 
         <ListView
             android:id="@+id/lettetlist"
-            android:layout_margin="10sp"
+            android:layout_marginHorizontal="20sp"
+            android:layout_marginVertical="10sp"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 

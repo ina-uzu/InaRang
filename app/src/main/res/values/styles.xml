@@ -40,9 +40,22 @@
         <item name="android:textStyle">bold</item>
         <item name="android:layout_centerHorizontal">true</item>
     </style>
+    <style name="text_small_title">
+        <item name = "android:textColor">@color/main</item>
+        <item name="android:textSize">26sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_centerHorizontal">true</item>
+    </style>
+
     <style name="text_normal">
         <item name = "android:textColor">@color/normText</item>
         <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="text_small_normal">
+        <item name = "android:textColor">@color/normText</item>
+        <item name="android:textSize">17sp</item>
         <item name="android:textStyle">bold</item>
     </style>
 

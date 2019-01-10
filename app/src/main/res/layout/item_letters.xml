@@ -9,6 +9,7 @@
     <TextView
         android:id="@+id/date"
         style="@style/text_normal"
+        android:textSize="20sp"
         android:textColor="@color/main"
         android:layout_gravity="center_vertical"
         android:layout_width="0sp"
@@ -17,11 +18,12 @@
 
     <TextView
         android:id="@+id/title"
+        android:textSize="20sp"
         style="@style/text_normal"
         android:layout_marginLeft="10sp"
         android:layout_gravity="center_vertical"
         android:layout_width="0sp"
         android:layout_height="wrap_content"
-        android:layout_weight="3"/>
+        android:layout_weight="5"/>
 
 </LinearLayout>
