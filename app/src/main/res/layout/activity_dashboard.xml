@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <RelativeLayout
+        android:id="@+id/top"
+        android:layout_width="match_parent"
+        android:layout_height="50sp"
+        android:background="@color/main">
+
+        <ImageButton
+            android:id="@+id/btn_menu"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:background="@drawable/nav_bt"/>
+    </RelativeLayout>
+
+    <HorizontalScrollView
+        android:id="@+id/profile"
+        android:layout_width="match_parent"
+        android:layout_height="80sp"
+        android:layout_below="@+id/top"
+        android:layout_margin="20sp">
+
+        <LinearLayout
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:text="안녕하새우, 오늘도 반가워요"
+                    android:textAlignment="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:text="인아씨"
+                    android:textAlignment="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/profile"
+        android:layout_marginHorizontal="20sp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+
+                android:id="@+id/main_cal"
+                android:layout_width="match_parent"
+                android:layout_height="100sp"
+                android:layout_marginBottom="20sp"
+                android:background="@drawable/round"
+                android:gravity="center"
+                android:text="오늘의 일정은 0개 입니다." />
+
+            <TextView
+                android:id="@+id/main_table"
+                android:layout_width="match_parent"
+                android:layout_height="100sp"
+                android:layout_marginBottom="20sp"
+                android:background="@drawable/round"
+                android:gravity="center"
+                android:text="오늘은 야간이네요! 힘내세요" />
+
+            <TextView
+                android:id="@+id/main_letter"
+                android:layout_width="match_parent"
+                android:layout_height="100sp"
+                android:layout_marginBottom="20sp"
+                android:background="@drawable/round"
+                android:gravity="center"
+                android:text="새로운 편지 4통이 왔어요!" />
+
+            <TextView
+                android:id="@+id/main_bucket"
+                android:layout_width="match_parent"
+                android:layout_height="100sp"
+                android:layout_marginBottom="20sp"
+                android:background="@drawable/round"
+                android:gravity="center"
+                android:text="버킷리스트 3/15" />
+
+        </LinearLayout>
+    </ScrollView>
+
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        style="@style/fab_normal"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20sp" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab2"
+        style="@style/fab_normal"
+        android:layout_above="@+id/fab" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab3"
+        style="@style/fab_normal"
+        android:layout_above="@+id/fab2" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab4"
+        style="@style/fab_normal"
+        android:layout_above="@+id/fab3" />
+
+</RelativeLayout>

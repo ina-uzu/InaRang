@@ -44,7 +44,8 @@ public class MainActivity extends Activity {
         bt_worktable.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, WorktableActivity.class);
+                //Intent intent = new Intent(MainActivity.this, WorktableActivity.class);
+                Intent intent = new Intent(MainActivity.this, DashboardActivity.class);
                 startActivity(intent);
             }
         });
